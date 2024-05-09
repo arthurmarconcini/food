@@ -32,6 +32,7 @@ const ProductImage = ({ product }: ProductImageProps) => {
       >
         <ChevronLeftIcon />
       </Button>
+      <div className="absolute bottom-0 h-4 w-full rounded-t-lg bg-white" />
     </div>
   );
 };

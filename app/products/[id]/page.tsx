@@ -2,6 +2,7 @@ import { db } from "@/app/_lib/prisma";
 import { notFound } from "next/navigation";
 import ProductImage from "./_components/product-image";
 import ProductDetails from "./_components/product-details";
+import { Button } from "@/app/_components/ui/button";
 
 interface ProductPageProps {
   params: {
@@ -39,6 +40,9 @@ const ProductPage = async ({ params: { id } }: ProductPageProps) => {
     <div>
       <ProductImage product={product} />
       <ProductDetails product={product} complementaryProducts={juices} />
+      <div className="w-full px-5 pb-5 pt-1">
+        <Button className="w-full">Adicionar a sacola</Button>
+      </div>
     </div>
   );
 };
