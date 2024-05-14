@@ -1,6 +1,7 @@
 import { db } from "@/app/_lib/prisma";
 import { notFound } from "next/navigation";
 import RestaurantImage from "./_components/restaurant-image";
+import RestaurantDetails from "./_components/restaurant-details";
 
 interface RestaurantPageProps {
   params: {
@@ -33,6 +34,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
   return (
     <div>
       <RestaurantImage restaurant={transformedRestaurant} />
+      <RestaurantDetails restaurant={transformedRestaurant} />
     </div>
   );
 };
