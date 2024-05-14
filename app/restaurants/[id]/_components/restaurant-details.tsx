@@ -1,29 +1,33 @@
+import ProductList from "@/app/_components/product-list";
 import { Card } from "@/app/_components/ui/card";
 import { formatCurrency } from "@/app/_helpers/price";
+import { db } from "@/app/_lib/prisma";
+import { Prisma } from "@prisma/client";
 import { BikeIcon, StarIcon, TimerIcon } from "lucide-react";
 import Image from "next/image";
 
 interface RestaurantDetailsProps {
-  restaurant: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    deliveryFee: number;
-    deliveryTimeMinutes: number;
-    products: {
-      id: string;
-      name: string;
-      description: string;
-      imageUrl: string;
-      price: number;
-      discountPercentage: number;
-      restaurantId: string;
-      categoryId: string;
-    }[];
-  };
+  restaurant: Prisma.RestaurantGetPayload<{
+    include: {
+      products: true;
+      categories: true;
+    };
+  }>;
 }
 
-const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
+const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
+  const products = await db.product.findMany({
+    include: {
+      restaurant: true,
+      category: true,
+    },
+    where: {
+      restaurantId: restaurant.id,
+    },
+  });
+
+  const randomProducts = products.sort(() => Math.random() - 0.5).slice(0, 10);
+
   return (
     <div>
       {/* Detalhes do restaurante */}
@@ -52,12 +56,12 @@ const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
                 <h1 className="text-xs">Entrega</h1>
                 <BikeIcon size={13} />
               </div>
-              {restaurant.deliveryFee > 0 ? (
+              {Number(restaurant.deliveryFee) > 0 ? (
                 <span className="font-semibold">
-                  {formatCurrency(restaurant.deliveryFee)}
+                  {formatCurrency(Number(restaurant.deliveryFee))}
                 </span>
               ) : (
-                <h1 className="font-semibold">Gratis</h1>
+                <h1 className="font-semibold">Grátis</h1>
               )}
             </div>
             <div className="flex flex-col items-center justify-items-center gap-1 text-xs">
@@ -82,8 +86,22 @@ const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
       </div>
 
       {/* Mais pedidos */}
-      {/* Comida japonesa */}
-      {/* Sucos */}
+      <div className="mb-5 space-y-4">
+        <h3 className="px-5 font-semibold">Mais pedidos</h3>
+        <ProductList products={randomProducts} />
+      </div>
+
+      {/* Categorias */}
+      {restaurant.categories?.map((category) => (
+        <div key={category.id} className="mb-5 space-y-4">
+          <h3 className="px-5 font-semibold">{category.name}</h3>
+          <ProductList
+            products={products.filter(
+              (product) => product.categoryId === category.id,
+            )}
+          />
+        </div>
+      ))}
     </div>
   );
 };

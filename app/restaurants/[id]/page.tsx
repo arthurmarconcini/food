@@ -15,6 +15,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
     },
     include: {
       products: true,
+      categories: true,
     },
   });
 
@@ -22,19 +23,10 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
     return notFound();
   }
 
-  const transformedRestaurant = {
-    ...restaurant,
-    deliveryFee: restaurant!.deliveryFee.toNumber(),
-    products: restaurant!.products.map((product) => ({
-      ...product,
-      price: product.price.toNumber(),
-    })),
-  };
-
   return (
     <div>
-      <RestaurantImage restaurant={transformedRestaurant} />
-      <RestaurantDetails restaurant={transformedRestaurant} />
+      <RestaurantImage restaurant={restaurant} />
+      <RestaurantDetails restaurant={restaurant} />
     </div>
   );
 };
