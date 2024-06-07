@@ -29,7 +29,7 @@ const RestaurantDetails = async ({ restaurant }: RestaurantDetailsProps) => {
   const randomProducts = products.sort(() => Math.random() - 0.5).slice(0, 10);
 
   return (
-    <div>
+    <div className="mb-10">
       {/* Detalhes do restaurante */}
       <div className="pb-5">
         <div className="flex justify-between px-5 pb-4 pt-1">

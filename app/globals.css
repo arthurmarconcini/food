@@ -56,4 +56,12 @@
   body {
     @apply text-foreground antialiased;
   }
+
+  .not-last-child-border-b {
+    @apply border-b;
+  }
+
+  .not-last-child-border-b > :not(:last-child) {
+    @apply border-b;
+  }
 }
