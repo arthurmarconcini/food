@@ -54,6 +54,8 @@ const ProductDetails = ({
           <Image
             src={product.restaurant.imageUrl}
             alt={product.restaurant.name}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={false}
             fill
             className="rounded-full object-cover"
           />
@@ -67,7 +69,7 @@ const ProductDetails = ({
         <div>
           <div className="flex items-center gap-2">
             <h2 className="text-xl font-semibold">
-              {formatCurrency(calculateProductTotalPrice(product))}
+              {formatCurrency(calculateProductTotalPrice(product).totalPrice)}
             </h2>
             {product.discountPercentage > 0 && (
               <DiscountBadge product={product} />

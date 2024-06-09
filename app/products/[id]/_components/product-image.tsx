@@ -22,6 +22,8 @@ const ProductImage = ({ product }: ProductImageProps) => {
       <Image
         src={product.imageUrl}
         alt={product.name}
+        priority
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         fill
         className="object-cover"
       />

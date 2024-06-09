@@ -9,14 +9,16 @@ import CartDetails from "./cart-details";
 const Header = () => {
   return (
     <div className="flex justify-between px-5 pt-6">
-      <Image
-        src="/logo.png"
-        alt="Foods"
-        height={30}
-        width={100}
-        className="h-auto w-auto"
-        priority={true}
-      />
+      <div className="relative h-[30px] w-[100px]">
+        <Image
+          src="/logo.png"
+          alt="Foods"
+          fill
+          priority={true}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </div>
+
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="ghost">

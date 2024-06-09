@@ -41,7 +41,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <h2 className="truncate text-sm">{product.name}</h2>
           <div className="flex items-center gap-1">
             <h3 className="font-semibold">
-              {formatCurrency(calculateProductTotalPrice(product))}
+              {formatCurrency(calculateProductTotalPrice(product).totalPrice)}
             </h3>
             {product.discountPercentage > 0 && (
               <span className="text-xs text-muted-foreground line-through">
