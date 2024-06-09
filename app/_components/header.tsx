@@ -9,9 +9,16 @@ import CartDetails from "./cart-details";
 const Header = () => {
   return (
     <div className="flex justify-between px-5 pt-6">
-      <Image src="/logo.png" alt="Foods" height={30} width={100} />
+      <Image
+        src="/logo.png"
+        alt="Foods"
+        height={30}
+        width={100}
+        className="h-auto w-auto"
+        priority={true}
+      />
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger asChild>
           <Button variant="ghost">
             <MenuIcon />
           </Button>

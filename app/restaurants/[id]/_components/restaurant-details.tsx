@@ -2,9 +2,11 @@ import ProductList from "@/app/_components/product-list";
 import { Card } from "@/app/_components/ui/card";
 import { formatCurrency } from "@/app/_helpers/price";
 import { db } from "@/app/_lib/prisma";
-import { Prisma } from "@prisma/client";
+
 import { BikeIcon, StarIcon, TimerIcon } from "lucide-react";
 import Image from "next/image";
+
+import { Prisma } from "@prisma/client";
 
 interface RestaurantDetailsProps {
   restaurant: Prisma.RestaurantGetPayload<{

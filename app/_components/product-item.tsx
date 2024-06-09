@@ -24,7 +24,8 @@ const ProductItem = ({ product }: ProductItemProps) => {
           <Image
             src={product.imageUrl}
             alt={product.name}
-            layout="fill"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className=" rounded-lg object-cover shadow-md"
           />
           {product.discountPercentage > 0 && (

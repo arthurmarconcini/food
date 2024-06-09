@@ -18,6 +18,7 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
             src={restaurant.imageUrl}
             fill
             className="rounded-lg object-cover "
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             alt={restaurant.name}
           />
           <div className="absolute left-2 top-2 flex items-center gap-0.5 rounded-full bg-white px-2 py-[2px]">

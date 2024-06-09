@@ -11,6 +11,7 @@ const CartItem = () => {
             "https://utfs.io/f/5ef70d5c-892b-424d-8655-6bc2716411e1-1lryd0.png"
           }
           alt="Image"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           fill
           className="rounded-lg object-cover"
         />
