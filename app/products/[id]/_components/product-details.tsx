@@ -8,6 +8,7 @@ import {
   calculateProductTotalPrice,
   formatCurrency,
 } from "@/app/_helpers/price";
+import { CartContext } from "@/app/_providers/cart";
 import { Prisma } from "@prisma/client";
 import {
   BikeIcon,
@@ -16,7 +17,7 @@ import {
   TimerIcon,
 } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -37,6 +38,8 @@ const ProductDetails = ({
 }: ProductDetailsProps) => {
   const [quantity, setQuantity] = useState(1);
 
+  const { addProductToCart } = useContext(CartContext);
+
   const handleIncreaseQuantity = () => {
     setQuantity((prev) => prev + 1);
   };
@@ -45,6 +48,16 @@ const ProductDetails = ({
     if (quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  const handleAddToCart = () => {
+    addProductToCart({
+      ...product,
+      quantity,
+      totalPrice: calculateProductTotalPrice(product).totalPrice,
+    });
+
+    setQuantity(1);
   };
 
   return (
@@ -131,6 +144,11 @@ const ProductDetails = ({
       <div className="mt-6 space-y-3">
         <h3 className="px-5 font-semibold">Sucos</h3>
         <ProductList products={complementaryProducts} />
+      </div>
+      <div className="mt-6 w-full px-5 pb-5 pt-1">
+        <Button onClick={handleAddToCart} className="w-full">
+          Adicionar a sacola
+        </Button>
       </div>
     </div>
   );
