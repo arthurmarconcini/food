@@ -51,8 +51,8 @@ const Cart = () => {
             <SheetTrigger asChild>
               <Button>Ver sacola</Button>
             </SheetTrigger>
-            <SheetContent>
-              <div className="h-[calc(100%-48px)] py-4">
+            <SheetContent className="w-[90%]">
+              <div className="h-[calc(100%-48px)]  py-4">
                 <SheetHeader>
                   <h1 className="mb-6 text-left text-lg font-semibold">
                     Sacola
@@ -61,7 +61,9 @@ const Cart = () => {
 
                 <div className="flex h-full flex-1 flex-col justify-between">
                   <div className="flex flex-col gap-4 overflow-y-auto ">
-                    <CartItem />
+                    {products.map((product) => (
+                      <CartItem key={product.id} product={product} />
+                    ))}
                   </div>
 
                   <div className="mt-4 flex flex-col gap-4">
