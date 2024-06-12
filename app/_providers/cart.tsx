@@ -21,6 +21,7 @@ interface ICartContextData {
   total: number;
   subtotal: number;
   totalDiscount: number;
+  isEmpty: boolean;
   addProductToCart: (product: CartProduct) => void;
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
@@ -35,6 +36,7 @@ export const CartContext = createContext<ICartContextData>({
   total: 0,
   subtotal: 0,
   totalDiscount: 0,
+  isEmpty: false,
   addProductToCart: () => {},
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
@@ -56,9 +58,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("@foods/cart", JSON.stringify(products));
-
-      console.log(products);
     }
+  }, [products]);
+
+  const isEmpty = useMemo(() => {
+    return products.length === 0;
   }, [products]);
 
   const subtotal = useMemo(() => {
@@ -123,6 +127,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         decreaseProductQuantity,
         increaseProductQuantity,
         removeProductFromCart,
+        isEmpty,
         total,
         subtotal,
         totalDiscount,

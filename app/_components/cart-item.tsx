@@ -16,6 +16,7 @@ const CartItem = () => {
           className="rounded-lg object-cover"
         />
       </div>
+
       <div className="flex flex-1 items-center justify-between">
         <div>
           <h1 className="text-xs">Sushi</h1>

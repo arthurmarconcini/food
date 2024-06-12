@@ -7,6 +7,8 @@ import { ChevronRightIcon } from "lucide-react";
 import { db } from "./_lib/prisma";
 import PromoBanner from "./_components/promo-banner";
 import RestaurantList from "./_components/restaurant-list";
+import { useContext } from "react";
+import { CartContext } from "./_providers/cart";
 
 export default async function Home() {
   const products = await db.product.findMany({
@@ -26,8 +28,9 @@ export default async function Home() {
   });
 
   return (
-    <div>
+    <div className="relative ">
       <Header />
+
       <div className="px-5 pt-6">
         <Search />
       </div>
