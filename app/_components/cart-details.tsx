@@ -1,12 +1,19 @@
+"use client";
+
+import { useContext } from "react";
 import { Card } from "./ui/card";
+import { CartContext } from "../_providers/cart";
+import { formatCurrency } from "../_helpers/price";
 
 const CartDetails = () => {
+  const { total, subtotal, totalDiscount } = useContext(CartContext);
+
   return (
     <Card className="bg-background">
       <div className="not-last-child-border-b flex flex-col p-5">
         <div className="flex items-center justify-between pb-2 text-xs">
           <p className="text-muted-foreground">Subtotal</p>
-          <p>R$ 35,00</p>
+          <p>{formatCurrency(subtotal)}</p>
         </div>
         <div className="flex items-center justify-between py-2 text-xs">
           <p className="text-muted-foreground">Entrega</p>
@@ -14,11 +21,11 @@ const CartDetails = () => {
         </div>
         <div className="flex items-center justify-between py-2 text-xs">
           <p className="text-muted-foreground">Descontos</p>
-          <p>-R$ 3,50</p>
+          <p>{formatCurrency(totalDiscount)}</p>
         </div>
         <div className="flex items-center justify-between pt-2 text-sm font-semibold">
           <p>Total</p>
-          <p>R$ 31,50</p>
+          <p>{formatCurrency(total)}</p>
         </div>
       </div>
     </Card>

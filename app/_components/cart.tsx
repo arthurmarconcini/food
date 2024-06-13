@@ -25,7 +25,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className="mb-12"></div>
+      <div className="mb-20"></div>
       <AnimatePresence>
         <motion.div
           initial="hidden"

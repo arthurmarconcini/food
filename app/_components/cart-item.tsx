@@ -4,6 +4,7 @@ import Image from "next/image";
 import { formatCurrency } from "../_helpers/price";
 import { CartContext, CartProduct } from "../_providers/cart";
 import { useContext } from "react";
+import { cn } from "../_lib/utils";
 
 interface CartItemProps {
   product: CartProduct;
@@ -35,14 +36,17 @@ const CartItem = ({ product }: CartItemProps) => {
             <span className="text-sm font-semibold">
               {formatCurrency(Number(product.price))}
             </span>
-            <span className="text-xs">
+            <span className="text-xs text-muted-foreground line-through">
               {formatCurrency(Number(product.totalPrice))}
             </span>
           </div>
           <div className="flex items-center gap-2 text-center">
             <Button
-              className="size-8 border border-solid border-muted-foreground p-1 "
-              variant={"ghost"}
+              className={cn(
+                "size-8 p-1",
+                `${product.quantity === 1 && "border border-muted-foreground"}`,
+              )}
+              variant={`${product.quantity > 1 ? "default" : "ghost"}`}
               onClick={() => decreaseProductQuantity(product.id)}
             >
               <ChevronLeftIcon className="w-8" />
