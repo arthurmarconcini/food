@@ -23,6 +23,7 @@
   --input: 356 30% 50%;
   --ring: 356 83% 51.6%;
   --radius: 0.75rem;
+  --button-secondary: 240, 5%, 96%;
 }
 
 .dark {
@@ -46,6 +47,7 @@
   --input: 356 30% 50%;
   --ring: 356 83% 51.6%;
   --radius: 0.75rem;
+  --button-secondary: 225 8% 53%;
 }
 
 @layer base {

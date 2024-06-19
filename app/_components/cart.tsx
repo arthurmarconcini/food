@@ -5,13 +5,15 @@ import CartItem from "./cart-item";
 
 import { Sheet, SheetTrigger, SheetContent, SheetHeader } from "./ui/sheet";
 import { Button } from "./ui/button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../_providers/cart";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatCurrency } from "../_helpers/price";
+import FinishOrderButton from "./finish-order-button";
 
 const Cart = () => {
   const { products, total } = useContext(CartContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   const variants = {
     hidden: { y: "100%", opacity: 0 },
@@ -22,6 +24,10 @@ const Cart = () => {
   if (!products.length) {
     return null;
   }
+
+  const handleFinishOrderClick = () => {
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -68,7 +74,13 @@ const Cart = () => {
 
                   <div className="mt-4 flex flex-col gap-4">
                     <CartDetails />
-                    <Button>Finalizar Pedido</Button>
+                    <Button onClick={handleFinishOrderClick}>
+                      Finalizar pedido
+                    </Button>
+                    <FinishOrderButton
+                      isOpen={isOpen}
+                      setIsOpen={() => setIsOpen(false)}
+                    />
                   </div>
                 </div>
               </div>
