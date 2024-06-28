@@ -4,7 +4,7 @@ import { Button } from "@/app/_components/ui/button";
 
 const Header = () => {
   return (
-    <div className="flex justify-between px-5 pt-6">
+    <div className="flex items-center justify-between px-5 py-6 lg:container lg:mx-auto ">
       <div className="relative h-[30px] w-[100px]">
         <Image
           src="/logo.png"
