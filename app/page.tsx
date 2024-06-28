@@ -27,7 +27,7 @@ export default async function Home() {
   });
 
   return (
-    <div className="relative  ">
+    <div className="relative">
       <Header />
 
       <div className="px-5 xl:bg-[#EA1D2C] xl:px-0 xl:pt-0">
@@ -53,46 +53,58 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="px-5 pt-6">
-        <CategoryList />
-      </div>
-      <div className="px-5 pt-6">
-        <PromoBanner
-          src="/banner-promo-01.png"
-          alt="Ate 30% de Desconto em Pizzas."
-        />
-      </div>
-      <div className="space-y-4 pt-6">
-        <div className="flex items-center justify-between px-5">
-          <h2 className="font-semibold">Pedidos Recomendados</h2>
-          <Button
-            variant={"ghost"}
-            className="h-fit p-0 text-primary hover:bg-transparent"
-          >
-            Ver todos
-            <ChevronRightIcon size={16} />
-          </Button>
+      <div className="container mx-auto">
+        <div className=" pt-6">
+          <CategoryList />
         </div>
-        <ProductList products={products} />
-      </div>
-      <div className="px-5 pt-6">
-        <PromoBanner
-          src="/banner-promo-02.png"
-          alt="A partir de 17,90 R$ em lanches."
-        />
-      </div>
-      <div className="space-y-4 py-6">
-        <div className="flex items-center justify-between px-5">
-          <h2 className="font-semibold">Restaurantes Recomendados</h2>
-          <Button
-            variant={"ghost"}
-            className="h-fit p-0 text-primary hover:bg-transparent"
-          >
-            Ver todos
-            <ChevronRightIcon size={16} />
-          </Button>
+        <div className="px-5 pt-6 xl:hidden">
+          <PromoBanner
+            src="/banner-promo-01.png"
+            alt="Ate 30% de Desconto em Pizzas."
+          />
         </div>
-        <RestaurantList />
+        <div className="space-y-4 pt-6">
+          <div className="flex items-center justify-between px-5">
+            <h2 className="font-semibold">Pedidos Recomendados</h2>
+            <Button
+              variant={"ghost"}
+              className="h-fit p-0 text-primary hover:bg-transparent"
+            >
+              Ver todos
+              <ChevronRightIcon size={16} />
+            </Button>
+          </div>
+          <ProductList products={products} />
+        </div>
+        <div className="hidden grid-cols-2 gap-5 px-5 pt-6  xl:grid">
+          <PromoBanner
+            src="/banner-promo-01.png"
+            alt="Ate 30% de Desconto em Pizzas."
+          />
+          <PromoBanner
+            src="/banner-promo-02.png"
+            alt="A partir de 17,90 R$ em lanches."
+          />
+        </div>
+        <div className="px-5 pt-6 xl:hidden">
+          <PromoBanner
+            src="/banner-promo-02.png"
+            alt="A partir de 17,90 R$ em lanches."
+          />
+        </div>
+        <div className="space-y-4 py-6">
+          <div className="flex items-center justify-between px-5">
+            <h2 className="font-semibold">Restaurantes Recomendados</h2>
+            <Button
+              variant={"ghost"}
+              className="h-fit p-0 text-primary hover:bg-transparent"
+            >
+              Ver todos
+              <ChevronRightIcon size={16} />
+            </Button>
+          </div>
+          <RestaurantList />
+        </div>
       </div>
     </div>
   );
