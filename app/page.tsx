@@ -53,7 +53,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="container mx-auto">
+      <div className="lg:container lg:mx-auto">
         <div className=" pt-6">
           <CategoryList />
         </div>
