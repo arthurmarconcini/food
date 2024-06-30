@@ -2,10 +2,14 @@
 
 import { SearchIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { useEffect, useState } from "react";
+import { Input, InputProps } from "./ui/input";
+import React, { useEffect, useState } from "react";
 
-const Search = () => {
+interface SearchProps extends InputProps {
+  className?: string;
+}
+
+const Search = ({ className, ...props }: SearchProps) => {
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   useEffect(() => {
@@ -22,9 +26,10 @@ const Search = () => {
 
   if (isLargeScreen) {
     return (
-      <div className="flex rounded-md bg-white p-4">
+      <div className={`flex rounded-md bg-white p-4 ${className}`}>
         <div className="flex w-full items-center overflow-hidden rounded-md bg-background">
           <input
+            {...props}
             placeholder="Buscar restaurantes"
             className="w-full bg-background px-4 py-3 focus:outline-none"
           />
@@ -37,8 +42,12 @@ const Search = () => {
   }
 
   return (
-    <div className="flex gap-2">
-      <Input placeholder="Buscar restaurantes" className="border-none" />
+    <div className={`${className} flex gap-2`}>
+      <Input
+        {...props}
+        placeholder="Buscar restaurantes"
+        className="border-none"
+      />
       <Button size="icon">
         <SearchIcon size={20} />
       </Button>

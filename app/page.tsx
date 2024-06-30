@@ -30,8 +30,8 @@ export default async function Home() {
     <div className="relative">
       <Header />
 
-      <div className="px-5 xl:bg-[#EA1D2C] xl:px-0 xl:pt-0">
-        <div className="xl:container xl:mx-auto xl:grid xl:h-[500px] xl:grid-cols-2">
+      <div className="xl:bg-[#EA1D2C] xl:pt-0">
+        <div className="px-5 xl:container xl:mx-auto xl:grid xl:h-[500px] xl:grid-cols-2">
           <div className="flex-col justify-center gap-8 xl:flex">
             <div className="hidden gap-4 text-white xl:flex xl:flex-col">
               <h1 className="text-5xl font-bold shadow-sm">Está com fome?</h1>
@@ -53,18 +53,18 @@ export default async function Home() {
           </div>
         </div>
       </div>
-      <div className="lg:container lg:mx-auto">
-        <div className=" pt-6">
+      <div className=" xl:container xl:mx-auto ">
+        <div className="px-5 pt-6 xl:px-0">
           <CategoryList />
         </div>
-        <div className="px-5 pt-6 xl:hidden">
+        <div className="px-5 pt-6 xl:hidden xl:px-0">
           <PromoBanner
             src="/banner-promo-01.png"
             alt="Ate 30% de Desconto em Pizzas."
           />
         </div>
         <div className="space-y-4 pt-6">
-          <div className="flex items-center justify-between px-5">
+          <div className="flex items-center justify-between px-5 xl:px-0">
             <h2 className="font-semibold">Pedidos Recomendados</h2>
             <Button
               variant={"ghost"}
@@ -76,7 +76,7 @@ export default async function Home() {
           </div>
           <ProductList products={products} />
         </div>
-        <div className="hidden grid-cols-2 gap-5 px-5 pt-6  xl:grid">
+        <div className="hidden grid-cols-2 gap-5 pt-6 xl:grid ">
           <PromoBanner
             src="/banner-promo-01.png"
             alt="Ate 30% de Desconto em Pizzas."
@@ -86,14 +86,14 @@ export default async function Home() {
             alt="A partir de 17,90 R$ em lanches."
           />
         </div>
-        <div className="px-5 pt-6 xl:hidden">
+        <div className="px-5 pt-6 xl:hidden xl:px-0">
           <PromoBanner
             src="/banner-promo-02.png"
             alt="A partir de 17,90 R$ em lanches."
           />
         </div>
         <div className="space-y-4 py-6">
-          <div className="flex items-center justify-between px-5">
+          <div className="flex items-center justify-between px-5 xl:px-0">
             <h2 className="font-semibold">Restaurantes Recomendados</h2>
             <Button
               variant={"ghost"}
