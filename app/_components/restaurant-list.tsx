@@ -1,10 +1,22 @@
-import { db } from "../_lib/prisma";
-import RestaurantItem from "./restaurant-item";
+"use client";
 
-const RestaurantList = async () => {
-  const restaurants = await db.restaurant.findMany({
-    take: 10,
-  });
+import { Restaurant } from "@prisma/client";
+
+import RestaurantItem from "./restaurant-item";
+import { useEffect, useState } from "react";
+
+const RestaurantList = () => {
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+
+  useEffect(() => {
+    async function fetchRestaurants() {
+      const res = await fetch("/api/restaurants");
+      const data = await res.json();
+      setRestaurants(data);
+    }
+
+    fetchRestaurants();
+  }, []);
 
   return (
     <div className="flex gap-4 overflow-x-scroll px-5 xl:px-0 [&::-webkit-scrollbar]:hidden">

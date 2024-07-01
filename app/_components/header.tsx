@@ -5,15 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Search from "./search";
 import Menu from "./menu";
-import { useState } from "react";
 
 const Header = () => {
-  const [search, setSearch] = useState("");
-
   const path = usePathname().split("/")[1];
 
   return (
-    <div className="flex items-center justify-between px-5 py-6 xl:container xl:mx-auto  ">
+    <div className="mx-7 flex items-center justify-between py-6 xl:container xl:mx-auto   ">
       <Link href={"/"}>
         <div className="relative h-[30px] w-[100px]">
           <Image
