@@ -15,6 +15,10 @@ interface FinishOrderButtonProps {
 }
 
 const FinishOrderButton = ({ isOpen, setIsOpen }: FinishOrderButtonProps) => {
+  const handleConfirm = () => {
+    setIsOpen();
+  };
+
   return (
     <AlertDialog open={isOpen}>
       <AlertDialogContent className="w-3/4 rounded-md bg-[#ffffff]">
@@ -34,7 +38,7 @@ const FinishOrderButton = ({ isOpen, setIsOpen }: FinishOrderButtonProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogAction
-            onClick={setIsOpen}
+            onClick={handleConfirm}
             className="bg-[#F4F4F5] font-semibold text-[#323232]"
           >
             Confirmar

@@ -1,19 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { MenuIcon } from "lucide-react";
-import { Button } from "@/app/_components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Search from "./search";
-import { useEffect } from "react";
+import Menu from "./menu";
+import { useState } from "react";
 
 const Header = () => {
-  const path = usePathname().split("/")[1];
+  const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    console.log(path);
-  }, [path]);
+  const path = usePathname().split("/")[1];
 
   return (
     <div className="flex items-center justify-between px-5 py-6 xl:container xl:mx-auto  ">
@@ -32,10 +29,7 @@ const Header = () => {
       {path === "categories" && (
         <Search className="hidden xl:block xl:w-full xl:max-w-2xl" />
       )}
-
-      <Button variant="ghost">
-        <MenuIcon />
-      </Button>
+      <Menu />
     </div>
   );
 };

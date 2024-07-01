@@ -3,7 +3,13 @@
 import CartDetails from "./cart-details";
 import CartItem from "./cart-item";
 
-import { Sheet, SheetTrigger, SheetContent, SheetHeader } from "./ui/sheet";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetClose,
+} from "./ui/sheet";
 import { Button } from "./ui/button";
 import { useContext, useState } from "react";
 import { CartContext } from "../_providers/cart";
@@ -14,6 +20,7 @@ import FinishOrderButton from "./finish-order-button";
 const Cart = () => {
   const { products, total } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const variants = {
     hidden: { y: "100%", opacity: 0 },
@@ -41,7 +48,7 @@ const Cart = () => {
           transition={{ duration: 0.5 }}
           className="fixed bottom-0 flex w-full items-center justify-between border border-[#ffffff] bg-white px-5 pb-5 pt-3"
         >
-          <div>
+          <div className="flex-1">
             <h1 className="text-xs text-muted-foreground">Total sem entrega</h1>
             <div>
               <span className="font-semibold">{formatCurrency(total)}</span>
@@ -57,6 +64,7 @@ const Cart = () => {
             <SheetTrigger asChild>
               <Button>Ver sacola</Button>
             </SheetTrigger>
+            <SheetClose />
             <SheetContent className="w-[90%]">
               <div className="h-[calc(100%-48px)]  py-4">
                 <SheetHeader>
