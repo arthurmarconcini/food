@@ -3,7 +3,7 @@
 import { SearchIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input, InputProps } from "./ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface SearchProps extends InputProps {
@@ -22,13 +22,24 @@ const Search = ({
 
   const router = useRouter();
 
-  const handleSearchClick = () => {
-    if (filter.trim()) {
-      router.push(`/restaurants?q=${encodeURIComponent(filter)}`);
-    } else {
-      router.push("/restaurants");
-    }
-  };
+  const handleSearchClick = useCallback(() => {
+    const trimmedFilter = filter.trim();
+    const path = trimmedFilter
+      ? `/restaurants?q=${encodeURIComponent(trimmedFilter)}`
+      : "/restaurants";
+    router.push(path);
+  }, [filter, router]);
+
+  useEffect(() => {
+    const handleEnter = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        handleSearchClick();
+      }
+    };
+
+    window.addEventListener("keydown", handleEnter);
+    return () => window.removeEventListener("keydown", handleEnter);
+  }, [handleSearchClick]);
 
   useEffect(() => {
     const handleResize = () => {

@@ -38,7 +38,7 @@ const Menu = () => {
             ) : (
               <div className="flex items-center justify-between gap-3">
                 <h1 className="font-semibold ">Olá. Faça seu login!</h1>
-                <Button onClick={() => signIn("google")}>
+                <Button onClick={() => signIn()}>
                   <LogInIcon />
                 </Button>
               </div>
