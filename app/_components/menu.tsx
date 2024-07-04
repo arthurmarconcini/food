@@ -13,9 +13,12 @@ import Link from "next/link";
 import MenuList from "./menu-list";
 
 import { usePathname } from "next/navigation";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Menu = () => {
   const path = usePathname().split("/")[1];
+
+  const data = useSession();
 
   return (
     <Sheet>
@@ -27,11 +30,19 @@ const Menu = () => {
       <SheetContent>
         <SheetTitle className="mb-6 text-lg font-semibold">Menu</SheetTitle>
         <div className="border-b border-b-slate-200 pb-6">
-          <div className="flex items-center justify-between">
-            <h1 className="font-semibold ">Olá. Faça seu login!</h1>
-            <Button>
-              <LogInIcon />
-            </Button>
+          <div>
+            {data.status === "authenticated" ? (
+              <div className="flex items-center">
+                <h1 className="font-semibold ">Olá, {data.data?.user?.name}</h1>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between gap-3">
+                <h1 className="font-semibold ">Olá. Faça seu login!</h1>
+                <Button onClick={() => signIn("google")}>
+                  <LogInIcon />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -74,7 +85,19 @@ const Menu = () => {
             </Link>
           </li>
         </ul>
+
         <MenuList />
+        <Button
+          variant={"link"}
+          className="mt-4"
+          onClick={() => {
+            if (data.status === "authenticated") {
+              signOut();
+            }
+          }}
+        >
+          Sair
+        </Button>
       </SheetContent>
     </Sheet>
   );

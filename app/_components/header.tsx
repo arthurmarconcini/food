@@ -12,7 +12,7 @@ const Header = () => {
   return (
     <div className="mx-7 flex items-center justify-between py-6 xl:container xl:mx-auto   ">
       <Link href={"/"}>
-        <div className="relative h-[30px] w-[100px]">
+        <div className="relative h-[30px] w-[70px]">
           <Image
             src="/logo.png"
             alt="Foods"
@@ -23,9 +23,9 @@ const Header = () => {
         </div>
       </Link>
 
-      {path === "categories" && (
+      {/* {path === "categories" && (
         <Search className="hidden xl:block xl:w-full xl:max-w-2xl" />
-      )}
+      )} */}
       <Menu />
     </div>
   );
