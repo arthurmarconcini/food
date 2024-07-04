@@ -2,6 +2,7 @@ import { db } from "@/app/_lib/prisma";
 import { notFound } from "next/navigation";
 import RestaurantImage from "./_components/restaurant-image";
 import RestaurantDetails from "./_components/restaurant-details";
+import { getServerSession } from "next-auth";
 
 interface RestaurantPageProps {
   params: {
@@ -19,13 +20,26 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
     },
   });
 
+  const data = await getServerSession();
+
+  const favoriteRestaurants = await db.userFavoriteRestaurant.findMany({
+    where: {
+      user: {
+        name: data?.user?.name,
+      },
+    },
+  });
+
   if (!restaurant) {
     return notFound();
   }
 
   return (
     <div>
-      <RestaurantImage restaurant={restaurant} />
+      <RestaurantImage
+        restaurant={restaurant}
+        favoriteRestaurants={favoriteRestaurants}
+      />
       <RestaurantDetails restaurant={restaurant} />
     </div>
   );
