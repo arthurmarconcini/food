@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import RestaurantImage from "./_components/restaurant-image";
 import RestaurantDetails from "./_components/restaurant-details";
 import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/_lib/auth";
 
 interface RestaurantPageProps {
   params: {
@@ -20,7 +21,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
     },
   });
 
-  const data = await getServerSession();
+  const data = await getServerSession(authOptions);
 
   const favoriteRestaurants = await db.userFavoriteRestaurant.findMany({
     where: {
@@ -40,6 +41,7 @@ const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
         restaurant={restaurant}
         favoriteRestaurants={favoriteRestaurants}
       />
+
       <RestaurantDetails restaurant={restaurant} />
     </div>
   );

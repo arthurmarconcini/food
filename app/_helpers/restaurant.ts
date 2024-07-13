@@ -1,10 +1,12 @@
 import { UserFavoriteRestaurant } from "@prisma/client";
 
-export default function isFavoritedRestaurant(
+export default function checkFavoritedRestaurant(
   restaurantId: string,
   userFavoriteRestaurants: UserFavoriteRestaurant[],
 ) {
-  return userFavoriteRestaurants.some(
+  const isFavorite = userFavoriteRestaurants.some(
     (favorite) => favorite.restaurantId === restaurantId,
   );
+
+  return isFavorite;
 }
