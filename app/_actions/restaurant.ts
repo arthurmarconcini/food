@@ -37,3 +37,17 @@ export const toggleFavoriteRestaurant = async (
 
   revalidatePath("/");
 };
+
+export const getUserFavoritedRestaurants = async (userId: string) => {
+  if (!userId) {
+    return null;
+  }
+
+  const userFavoriteRestaurants = await db.userFavoriteRestaurant.findMany({
+    where: {
+      userId,
+    },
+  });
+
+  return userFavoriteRestaurants;
+};

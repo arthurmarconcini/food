@@ -1,27 +1,26 @@
-"use client";
-
-import { Restaurant } from "@prisma/client";
-
+import { getServerSession } from "next-auth";
+import { db } from "../_lib/prisma";
 import RestaurantItem from "./restaurant-item";
-import { useEffect, useState } from "react";
+import { authOptions } from "../_lib/auth";
 
-const RestaurantList = () => {
-  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
+const RestaurantList = async () => {
+  const data = await getServerSession(authOptions);
 
-  useEffect(() => {
-    async function fetchRestaurants() {
-      const res = await fetch("/api/restaurants");
-      const data = await res.json();
-      setRestaurants(data);
-    }
-
-    fetchRestaurants();
-  }, []);
+  const restaurants = await db.restaurant.findMany({});
+  const userFavoriteRestaurants = await db.userFavoriteRestaurant.findMany({
+    where: {
+      userId: data?.user.id,
+    },
+  });
 
   return (
     <div className="flex gap-4 overflow-x-scroll px-5 xl:px-0 [&::-webkit-scrollbar]:hidden">
       {restaurants.map((restaurant) => (
-        <RestaurantItem restaurant={restaurant} key={restaurant.id} />
+        <RestaurantItem
+          restaurant={restaurant}
+          key={restaurant.id}
+          userFavoriteRestaurants={userFavoriteRestaurants}
+        />
       ))}
     </div>
   );

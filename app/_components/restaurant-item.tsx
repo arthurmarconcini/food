@@ -1,15 +1,25 @@
-import { Restaurant } from "@prisma/client";
-import { BikeIcon, HeartIcon, StarIcon, TimerIcon } from "lucide-react";
+"use client";
+
+import { Restaurant, UserFavoriteRestaurant } from "@prisma/client";
+import { BikeIcon, StarIcon, TimerIcon } from "lucide-react";
 import Image from "next/image";
 import { formatCurrency } from "../_helpers/price";
-import { Button } from "./ui/button";
+
 import Link from "next/link";
+import HeartButton from "./heart-button";
+import { useSession } from "next-auth/react";
 
 interface RestaurantItemProps {
   restaurant: Restaurant;
+  userFavoriteRestaurants: UserFavoriteRestaurant[];
 }
 
-const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
+const RestaurantItem = ({
+  restaurant,
+  userFavoriteRestaurants,
+}: RestaurantItemProps) => {
+  const { data } = useSession();
+
   return (
     <Link
       href={`/restaurants/${restaurant.id}`}
@@ -27,12 +37,13 @@ const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
           <StarIcon size={12} className="fill-yellow-400 text-yellow-400" />
           <span className="text-xs font-semibold">5.0</span>
         </div>
-        <Button
-          className="absolute right-2 top-2 h-7 w-7 rounded-full bg-gray-600/60"
-          size={"icon"}
-        >
-          <HeartIcon className=" fill-white text-white" size={16} />
-        </Button>
+        {data?.user && (
+          <HeartButton
+            restaurantId={restaurant.id}
+            userFavoritedRestaurants={userFavoriteRestaurants}
+            className="right-2 top-2 size-7"
+          />
+        )}
       </div>
       <div>
         <h3 className="text-sm font-semibold">{restaurant.name}</h3>
