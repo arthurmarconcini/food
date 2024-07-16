@@ -39,7 +39,7 @@ export default function MenuList() {
       {categories.map((category) => (
         <li key={category.id}>
           <Link
-            href={`/categories/${category.id}`}
+            href={`/categorias/${category.id}`}
             className={`flex items-center gap-3 px-3 py-4 ${
               path === category.id ? "rounded-full bg-primary text-white" : ""
             }`}

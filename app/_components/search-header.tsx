@@ -1,11 +1,9 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Search from "./search";
 
 const SearchHeader = () => {
-  const searchParams = useSearchParams();
   const [filter, setFilter] = useState<string>("");
 
   return (

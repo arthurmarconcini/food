@@ -25,8 +25,8 @@ const Search = ({
   const handleSearchClick = useCallback(() => {
     const trimmedFilter = filter.trim();
     const path = trimmedFilter
-      ? `/restaurants?q=${encodeURIComponent(trimmedFilter)}`
-      : "/restaurants";
+      ? `/restaurantes?q=${encodeURIComponent(trimmedFilter)}`
+      : "/restaurantes";
     router.push(path);
   }, [filter, router]);
 

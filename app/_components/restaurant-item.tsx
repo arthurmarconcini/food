@@ -22,7 +22,7 @@ const RestaurantItem = ({
 
   return (
     <Link
-      href={`/restaurants/${restaurant.id}`}
+      href={`/restaurantes/${restaurant.id}`}
       className=" min-w-[266px] space-y-3"
     >
       <div className="relative h-[136px] w-full">
