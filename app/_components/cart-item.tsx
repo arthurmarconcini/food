@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon, TrashIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { formatCurrency } from "../_helpers/price";
+import { calculateProductTotalPrice, formatCurrency } from "../_helpers/price";
 import { CartContext, CartProduct } from "../_providers/cart";
 import { useContext } from "react";
 import { cn } from "../_lib/utils";
@@ -34,10 +34,10 @@ const CartItem = ({ product }: CartItemProps) => {
           <h1 className="text-xs">{product.name}</h1>
           <div className="space-x-2 ">
             <span className="text-sm font-semibold">
-              {formatCurrency(Number(product.price))}
+              {formatCurrency(calculateProductTotalPrice(product).totalPrice)}
             </span>
             <span className="text-xs text-muted-foreground line-through">
-              {formatCurrency(Number(product.totalPrice))}
+              {formatCurrency(Number(product.price))}
             </span>
           </div>
           <div className="flex items-center gap-2 text-center">

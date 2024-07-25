@@ -7,9 +7,21 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { ProductWithTotalPrice } from "../_helpers/price";
+import { calculateProductTotalPrice } from "../_helpers/price";
+import { Prisma } from "@prisma/client";
 
-export interface CartProduct extends ProductWithTotalPrice {
+export interface CartProduct
+  extends Prisma.ProductGetPayload<{
+    include: {
+      restaurant: {
+        select: {
+          id: true;
+          deliveryFee: true;
+          deliveryTimeMinutes: true;
+        };
+      };
+    };
+  }> {
   quantity: number;
 }
 
@@ -26,6 +38,7 @@ interface ICartContextData {
   decreaseProductQuantity: (productId: string) => void;
   increaseProductQuantity: (productId: string) => void;
   removeProductFromCart: (productId: string) => void;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<ICartContextData>({
@@ -41,6 +54,7 @@ export const CartContext = createContext<ICartContextData>({
   decreaseProductQuantity: () => {},
   increaseProductQuantity: () => {},
   removeProductFromCart: () => {},
+  clearCart: () => {},
 });
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
@@ -73,7 +87,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const total = useMemo(() => {
     return products.reduce((acc, product) => {
-      return acc + product.totalPrice * product.quantity;
+      return (
+        acc + calculateProductTotalPrice(product).totalPrice * product.quantity
+      );
     }, 0);
   }, [products]);
 
@@ -119,6 +135,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const clearCart = () => {
+    setProducts([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -127,6 +147,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         decreaseProductQuantity,
         increaseProductQuantity,
         removeProductFromCart,
+        clearCart,
         isEmpty,
         total,
         subtotal,

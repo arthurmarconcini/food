@@ -6,7 +6,7 @@ import { CartContext } from "../_providers/cart";
 import { formatCurrency } from "../_helpers/price";
 
 const CartDetails = () => {
-  const { total, subtotal, totalDiscount } = useContext(CartContext);
+  const { total, subtotal, totalDiscount, products } = useContext(CartContext);
 
   return (
     <Card className="bg-background">
@@ -17,7 +17,9 @@ const CartDetails = () => {
         </div>
         <div className="flex items-center justify-between py-2 text-xs">
           <p className="text-muted-foreground">Entrega</p>
-          <p className="text-primary">GRATIS</p>
+          <p className="text-primary">
+            {formatCurrency(Number(products[0].restaurant.deliveryFee))}
+          </p>
         </div>
         <div className="flex items-center justify-between py-2 text-xs">
           <p className="text-muted-foreground">Descontos</p>

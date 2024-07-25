@@ -54,7 +54,6 @@ const ProductDetails = ({
     addProductToCart({
       ...product,
       quantity,
-      totalPrice: calculateProductTotalPrice(product).totalPrice,
     });
 
     setQuantity(1);

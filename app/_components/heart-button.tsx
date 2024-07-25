@@ -22,10 +22,11 @@ const HeartButton = ({
 }: HeartButtonProps) => {
   const { data } = useSession();
 
-  const isFavorite =
-    userFavoritedRestaurants?.some(
-      (fav) => fav.restaurantId === restaurantId,
-    ) || false;
+  const isFavorite = data?.user?.id
+    ? userFavoritedRestaurants?.some(
+        (fav) => fav.restaurantId === restaurantId,
+      ) || false
+    : false;
 
   const { handleClickToggleFavoriteRestaurant } = useToggleFavoriteRestaurant({
     userId: data?.user.id,

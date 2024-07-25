@@ -20,7 +20,6 @@ import FinishOrderButton from "./finish-order-button";
 const Cart = () => {
   const { products, total } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const variants = {
     hidden: { y: "100%", opacity: 0 },
@@ -60,7 +59,7 @@ const Cart = () => {
               )} Item`}</span>
             </div>
           </div>
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button>Ver sacola</Button>
             </SheetTrigger>
@@ -82,12 +81,10 @@ const Cart = () => {
 
                   <div className="mt-4 flex flex-col gap-4">
                     <CartDetails />
-                    <Button onClick={handleFinishOrderClick}>
-                      Finalizar pedido
-                    </Button>
+
                     <FinishOrderButton
                       isOpen={isOpen}
-                      setIsOpen={() => setIsOpen(false)}
+                      setIsOpen={() => setIsOpen(isOpen!)}
                     />
                   </div>
                 </div>

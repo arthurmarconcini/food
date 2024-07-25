@@ -85,9 +85,11 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              href={`/pedidos`}
+              href={`/meus-pedidos`}
               className={`flex items-center gap-3 px-3 py-4 ${
-                path === "pedidos" ? "rounded-full bg-primary text-white" : ""
+                path === "meus-pedidos"
+                  ? "rounded-full bg-primary text-white"
+                  : ""
               }`}
             >
               <ScrollIcon width={16} height={16} />

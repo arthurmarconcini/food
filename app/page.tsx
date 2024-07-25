@@ -56,7 +56,7 @@ export default async function Home() {
             <h2 className="font-semibold">Produtos Recomendados</h2>
             <Link
               href={{
-                pathname: "/products",
+                pathname: "/produtos",
               }}
               className="inline-flex h-fit items-center gap-1 p-0 text-primary hover:bg-transparent"
             >
@@ -87,7 +87,7 @@ export default async function Home() {
             <h2 className="font-semibold">Restaurantes Recomendados</h2>
             <Link
               href={{
-                pathname: "/restaurants",
+                pathname: "/restaurantes",
               }}
               className="inline-flex h-fit items-center gap-1 p-0 text-primary hover:bg-transparent"
             >
